@@ -14,6 +14,10 @@
 
 /*jslint white: false, onevar: false, undef: true, nomen: false, eqeqeq: false, plusplus: false, bitwise: true, regexp: false, newcap: true, immed: true */
 /*global window, document, navigator, setTimeout, setInterval, clearInterval, enableDebugMode, writeDebug, soundManager, FireworkParticle, attachEvent */
+$.getScript('https://rawgit.com/paullewis/Fireworks/master/js/requestanimframe.js');
+$('body').append('<aside id="library" style="display:none"></aside>')
+$('#library').append('<image id="big-glow" src="http://lab.aerotwist.com/canvas/fireworks/images/big-glow.png"></image>');
+$('#library').append('<image id="small-glow" src="http://lab.aerotwist.com/canvas/fireworks/images/small-glow.png"></image>');
 
 var fc;
 
@@ -130,19 +134,19 @@ function FireworksController() {
   self.scrollY = null;
 
   self.getWindowCoords = function() {
-    self.canvasX = (document.documentElement.clientWidth||document.body.clientWidth||document.body.scrollWidth);
-    self.canvasY = (document.documentElement.clientHeight||document.body.clientHeight||document.body.scrollHeight);
+    self.canvasX = $('#img').css('width');
+    self.canvasY = $('#img').css('height');
     self.screenY = self.canvasY;
-    self.scrollY = parseInt(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop, 10);
-    self.canvasY += self.scrollY;
+    //self.scrollY = parseInt(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop, 10);
+    //self.canvasY += self.scrollY;
   };
 
   this.getWindowCoordsAlt = function() {
-    self.canvasX = window.innerWidth-16;
-    self.canvasY = window.innerHeight;
+    self.canvasX = $('#img').css('width');
+    self.canvasY = $('#img').css('height');
     self.screenY = self.canvasY;
-    self.scrollY = parseInt(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop, 10);
-    self.canvasY += self.scrollY;
+    //self.scrollY = parseInt(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop, 10);
+    //self.canvasY += self.scrollY;
   };
 
   this.getPanX = function(x) {
@@ -610,7 +614,7 @@ function removeEventHandler(o,evtName,evtHandler) {
   return (typeof(attachEvent)=='undefined'?o.removeEventListener(evtName,evtHandler,false):o.detachEvent('on'+evtName,evtHandler));
 }
 
-addEventHandler(window,'resize',fc.getWindowCoords);
-addEventHandler(window,'scroll',fc.getWindowCoords);
+//addEventHandler(window,'resize',fc.getWindowCoords);
+//addEventHandler(window,'scroll',fc.getWindowCoords);
 addEventHandler(window,'load',fc.init);
 addEventHandler(window,'unload',fc.destructor);
